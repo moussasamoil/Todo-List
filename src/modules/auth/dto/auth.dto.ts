@@ -3,7 +3,7 @@ import { Exclude } from "class-transformer";
 import { IsInt, IsLowercase, IsNotEmpty, IsString, IsStrongPassword, Length, Max, Min } from "class-validator";
 
 
-export class userDto {
+export class AuthDto {
     @IsString()
     @IsLowercase()
     @IsNotEmpty()
@@ -23,7 +23,7 @@ export class userDto {
     @Min(18)
     @Max(99)
     @IsNotEmpty()
-    @ApiProperty({ example: '18 not 18.1 true integer number' })
+    @ApiProperty()
     age!: number;
     @IsString()
     @Length(6, 20)
