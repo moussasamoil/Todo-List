@@ -10,10 +10,10 @@ export class User {
     last_name!: string;
 
     @Prop({ type: String, required: true, index: true, unique: true })
-    email!: String;
+    email!: string;
 
     @Prop({ type: String, required: true, length: [6, 20] })
-    password!: String;
+    password!: string;
 
     @Prop({ type: Number, required: true, max: 99, min: 18 })
     age!: number

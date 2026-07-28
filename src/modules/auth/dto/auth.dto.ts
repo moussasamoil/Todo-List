@@ -3,7 +3,7 @@ import { Exclude } from "class-transformer";
 import { IsInt, IsLowercase, IsNotEmpty, IsString, IsStrongPassword, Length, Max, Min } from "class-validator";
 
 
-export class AuthDto {
+export class SignUpDto {
     @IsString()
     @IsLowercase()
     @IsNotEmpty()
@@ -31,5 +31,17 @@ export class AuthDto {
     @IsStrongPassword()
     @ApiProperty({ example: 'ْْXx123?@. ..' })
     password!: string
+}
 
+export class SignInDto {
+    @IsString()
+    @IsLowercase()
+    @IsNotEmpty()
+    @ApiProperty({})
+    email!: string
+
+    @IsString()
+    @IsNotEmpty()
+    @ApiProperty({})
+    password!: string
 }

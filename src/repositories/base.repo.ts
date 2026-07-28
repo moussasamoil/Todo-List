@@ -6,7 +6,6 @@ export abstract class BaseRepo<T> {
 
     async createDocument(data: Partial<T>): Promise<T> {
         let result = await this.model.create(data);
-        delete (result as any).password;
         return result;
     }
 
@@ -15,6 +14,6 @@ export abstract class BaseRepo<T> {
     }
 
     findOne(filter: QueryFilter<T>) {
-      return this.model.find(filter).exec()
+      return this.model.findOne(filter).exec()
     }
 }
