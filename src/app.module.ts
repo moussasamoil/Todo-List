@@ -6,6 +6,12 @@ import { UserModule } from './modules/user/user.module';
 import { AuthModule } from './modules/auth/auth.module';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { Connection } from 'mongoose';
+import { APP_GUARD } from '@nestjs/core';
+import { AuthGuard } from './guards/authentication.guard';
+import { JwtEncryptService } from './common/services/jwt.service';
+import { JwtService } from '@nestjs/jwt';
+import { UserRepo } from './repositories/user.repo';
+import { userModel } from './models/user.model';
 
 @Module({
   imports: [
@@ -31,8 +37,14 @@ import { Connection } from 'mongoose';
       }),
     }),
     UserModule,
-    AuthModule],
+    AuthModule,
+    userModel],
   controllers: [AppController],
-  providers: [AppService],
+  providers: [
+    {
+      provide: APP_GUARD,
+      useClass: AuthGuard
+    },
+    AppService, JwtEncryptService, JwtService, UserRepo],
 })
 export class AppModule { }
