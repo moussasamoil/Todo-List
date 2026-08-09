@@ -4,11 +4,13 @@ import { UserController } from './user.controller';
 import { UserRepo } from '../../repositories/user.repo';
 import { userModel } from '../../models/user.model';
 import { TestMiddleware } from '../../middlewares/test.middleware';
+import { JwtEncryptService } from '../../common/services/jwt.service';
+import { JwtService } from '@nestjs/jwt';
 
 @Module({
   imports:[userModel],
   controllers: [UserController],
-  providers: [UserService ,UserRepo],
+  providers: [UserService ,UserRepo ,JwtEncryptService,JwtService],
 })
 export class UserModule implements NestModule {
   configure(consumer: MiddlewareConsumer) {

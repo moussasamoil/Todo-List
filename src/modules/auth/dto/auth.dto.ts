@@ -1,6 +1,7 @@
 import { ApiProperty } from "@nestjs/swagger";
-import { Exclude } from "class-transformer";
-import { IsInt, IsLowercase, IsNotEmpty, IsString, IsStrongPassword, Length, Max, Min } from "class-validator";
+import { IsEnum, IsInt, IsLowercase, IsNotEmpty, IsString, IsStrongPassword, isUppercase, Length, Max, Min } from "class-validator";
+import { Roles } from "../../../types/enum";
+import { Transform } from "class-transformer";
 
 
 export class SignUpDto {
@@ -31,6 +32,11 @@ export class SignUpDto {
     @IsStrongPassword()
     @ApiProperty({ example: 'ْْXx123?@. ..' })
     password!: string
+    @IsEnum(Roles)
+    @Transform(({value})=>value?.toUpperCase())
+    @ApiProperty()
+    role: Roles = Roles.USER;
+
 }
 
 export class SignInDto {

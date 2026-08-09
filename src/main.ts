@@ -11,9 +11,17 @@ async function bootstrap() {
     .setTitle('Todo List')
     .setDescription('this is clarifying the end point of Todo list')
     .setVersion('1.0.0')
+    .addBearerAuth({
+      type:"http",
+      scheme:"bearer",
+      bearerFormat:"JWT",
+      name:"Authorization",
+      description:"Enter JWT Token",
+      in:'header'
+    }, 'access-token')
     .build();
   const documentFactory = SwaggerModule.createDocument(app, config);
-  SwaggerModule.setup('api-docs', app, documentFactory);
+  SwaggerModule.setup('', app, documentFactory);
   // const url = `http://localhost:${process.env.PORT||3000}/api-docs`;
   // const startCommand = process.platform === 'darwin' ? 'open' : process.platform === 'win32' ? 'start' : 'xdg-open';
   // exec(`${startCommand} ${url}`, (error) => {

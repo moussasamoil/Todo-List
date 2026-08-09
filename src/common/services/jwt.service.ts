@@ -6,7 +6,7 @@ import { ConfigService } from "@nestjs/config";
 
 @Injectable()
 export class JwtEncryptService {
-    constructor(private readonly _UserRepo: UserRepo, private readonly jwtService: JwtService , private config: ConfigService) { }
+    constructor(private readonly _UserRepo: UserRepo, private readonly jwtService: JwtService, private config: ConfigService) { }
 
     async generateToken(user: userDocument) {
         const payload = {
@@ -29,10 +29,17 @@ export class JwtEncryptService {
             secret: this.config.get<string>('JWT_REFRESH_TOKEN'),
         })
         const user = await this._UserRepo.findOne({ _id: payload.sub })
-        if(!user){
+        if (!user) {
             throw new NotFoundException("user not found")
         }
         return this.generateToken(user)
+    }
+
+    async verifyToken(token: string) {
+        const payload = await this.jwtService.verifyAsync<{ sub: string }>(token, {
+            secret: this.config.get<string>('JWT_ACCESS_TOKEN'),
+        })
+        return payload;
     }
 
 }

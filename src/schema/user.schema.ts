@@ -1,4 +1,5 @@
 import { Prop, Schema, SchemaFactory } from "@nestjs/mongoose";
+import { Roles } from "../types/enum";
 
 
 @Schema({ timestamps: true, toObject: { virtuals: true }, toJSON: { virtuals: true } })
@@ -17,6 +18,8 @@ export class User {
 
     @Prop({ type: Number, required: true, max: 99, min: 18 })
     age!: number
+    @Prop({ type: String, default: Roles.USER  })
+    role!: Roles
 
 }
 
