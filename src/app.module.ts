@@ -12,6 +12,7 @@ import { JwtEncryptService } from './common/services/jwt.service';
 import { JwtService } from '@nestjs/jwt';
 import { UserRepo } from './repositories/user.repo';
 import { userModel } from './models/user.model';
+import { TasksModule } from './modules/tasks/tasks.module';
 
 @Module({
   imports: [
@@ -38,7 +39,8 @@ import { userModel } from './models/user.model';
     }),
     UserModule,
     AuthModule,
-    userModel],
+    userModel,
+    TasksModule],
   controllers: [AppController],
   providers: [
     {
